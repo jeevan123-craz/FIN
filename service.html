@@ -95,6 +95,9 @@
       border-left: 4px solid #007bff;
       margin-bottom: 10px;
       border-radius: 5px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .expense-row {
       display: flex;
@@ -103,6 +106,14 @@
       margin-top: 10px;
     }
     .expense-row input { flex: 1; }
+    .delete-btn {
+      background: #dc3545;
+      padding: 5px 8px;
+      border-radius: 4px;
+      font-size: 12px;
+      margin-left: 10px;
+    }
+    .delete-btn:hover { background: #c82333; }
   </style>
 </head>
 <body>
@@ -124,8 +135,8 @@
         <input type="text" id="newCategory" placeholder="New category (e.g. Fuel)">
         <button onclick="addCategory()">➕ Add</button>
       </div>
-
       <button onclick="calculate()">Calculate Balance</button>
+      <button onclick="deleteAllExpenses()" style="background:#dc3545;">🗑 Delete All Expenses</button>
       <div id="result"></div>
       <canvas id="expenseChart"></canvas>
 
@@ -156,17 +167,15 @@
       <input type="email" id="userEmail" placeholder="you@example.com">
 
       <button onclick="addLoan()">Add Loan EMI</button>
+      <button onclick="deleteAllLoans()" style="background:#dc3545;">🗑 Delete All EMI</button>
       <div class="loan-list" id="loanList"></div>
     </div>
   </div>
 
-  <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    emailjs.init("a5wT8LmFWcwgsHzMj"); // Replace with EmailJS public key
     let expenseChart;
-    let loans = [];
+    let loans = JSON.parse(localStorage.getItem("loans")) || [];
     let categories = JSON.parse(localStorage.getItem("categories")) || [
       { name: "Groceries", value: 0 },
       { name: "Medical", value: 0 },
@@ -176,6 +185,7 @@
     window.onload = function() {
       document.getElementById("salary").value = localStorage.getItem("salary") || "";
       renderCategories();
+      renderLoans();
     };
 
     function renderCategories() {
@@ -236,22 +246,39 @@
       const date=document.getElementById('loanDate').value;
       const email=document.getElementById('userEmail').value;
       if(!name||!amount||!date||!email){ alert("Please fill all loan fields!"); return; }
-      const loan={name,amount,date,email};
-      loans.push(loan);
+      loans.push({name,amount,date,email});
+      localStorage.setItem("loans", JSON.stringify(loans));
       renderLoans();
-
-      emailjs.send("service_1jyd916","service_1jyd916",{loan_name:name,loan_amount:amount,loan_date:date,user_email:email})
-        .then(()=>{alert("📧 Reminder email sent to "+email);})
-        .catch(err=>{console.error(err);});
     }
 
-    function renderLoans() {
-      const loanList=document.getElementById('loanList'); loanList.innerHTML="";
-      loans.forEach(l=>{
-        loanList.innerHTML+=`<div class="loan-item">
-          <strong>${l.name}</strong><br>EMI: ₹${l.amount}<br>Due: ${l.date}<br>Email: ${l.email}
-        </div>`;
-      });
+    function deleteLoan(index) {
+      loans.splice(index,1);
+      localStorage.setItem("loans", JSON.stringify(loans));
+      renderLoans();
+    }
+
+    function deleteAllLoans() {
+      if(confirm("Are you sure you want to delete all EMIs?")) {
+        loans = [];
+        localStorage.removeItem("loans");
+        renderLoans();
+      }
+    }
+
+    function deleteAllExpenses() {
+      if(confirm("Are you sure you want to delete all expenses?")) {
+        categories = [
+          { name: "Groceries", value: 0 },
+          { name: "Medical", value: 0 },
+          { name: "Shopping", value: 0 }
+        ];
+        localStorage.removeItem("categories");
+        document.getElementById("salary").value = "";
+        localStorage.removeItem("salary");
+        renderCategories();
+        document.getElementById("result").innerHTML = "";
+        if(expenseChart) expenseChart.destroy();
+      }
     }
 
     // Fuel Calculator
@@ -260,7 +287,6 @@
       const end=document.getElementById("endPoint").value;
       const mileage=parseFloat(document.getElementById("mileage").value);
       const fuelPrice=parseFloat(document.getElementById("fuelPrice").value);
-
       if(!start||!end||!mileage||!fuelPrice){return alert("Please fill all fields!");}
 
       const apiKey="YOUR_GOOGLE_API_KEY"; // Replace with your Google Maps API key
@@ -282,7 +308,19 @@
         `;
       } catch(err){console.error(err); alert("Failed to fetch distance. Check console."); }
     }
+
+    function renderLoans() {
+      const loanList=document.getElementById('loanList'); 
+      loanList.innerHTML="";
+      loans.forEach((l,i)=>{
+        loanList.innerHTML+=`<div class="loan-item">
+          <div>
+            <strong>${l.name}</strong><br>EMI: ₹${l.amount}<br>Due: ${l.date}<br>Email: ${l.email}
+          </div>
+          <button class="delete-btn" onclick="deleteLoan(${i})">Delete</button>
+        </div>`;
+      });
+    }
   </script>
 </body>
 </html>
-
