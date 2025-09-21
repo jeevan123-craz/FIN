@@ -164,7 +164,7 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
   <script>
-    emailjs.init("YOUR_PUBLIC_KEY"); // Replace with EmailJS public key
+    emailjs.init("a5wT8LmFWcwgsHzMj"); // Replace with EmailJS public key
     let expenseChart;
     let loans = [];
     let categories = JSON.parse(localStorage.getItem("categories")) || [
@@ -240,7 +240,7 @@
       loans.push(loan);
       renderLoans();
 
-      emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{loan_name:name,loan_amount:amount,loan_date:date,user_email:email})
+      emailjs.send("service_1jyd916","service_1jyd916",{loan_name:name,loan_amount:amount,loan_date:date,user_email:email})
         .then(()=>{alert("📧 Reminder email sent to "+email);})
         .catch(err=>{console.error(err);});
     }
@@ -285,3 +285,4 @@
   </script>
 </body>
 </html>
+
