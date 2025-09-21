@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>💼 JEEVANKISHORE FINANCE LOGIN</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(135deg, #2193b0, #6dd5ed, #b2fefa);
+      overflow: hidden;
+    }
+
+    .login-container {
+      display: flex;
+      background: white;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+      overflow: hidden;
+      width: 800px;
+      max-width: 90%;
+      animation: fadeIn 1s ease-out;
+    }
+
+    .login-photo {
+      flex: 1;
+      background: url('alien.png') center/cover no-repeat;
+      animation: slideInLeft 1s ease-out;
+    }
+
+    .login-box {
+      flex: 1;
+      padding: 40px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      animation: slideInRight 1s ease-out;
+    }
+
+    .login-box h2 {
+      margin-bottom: 20px;
+      color: #00796b;
+      text-align: center;
+      animation: fadeIn 1.2s ease-out;
+    }
+
+    input {
+      padding: 12px;
+      margin: 12px 0;
+      width: 70%;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+      outline: none;
+      transition: 0.4s;
+    }
+
+    input:focus {
+      border-color: #00796b;
+      box-shadow: 0 0 8px rgba(0,121,107,0.5);
+    }
+
+    button {
+      padding: 12px;
+      background-color: #00796b;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      margin-top: 10px;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #004d40;
+      transform: scale(1.05);
+    }
+
+    @keyframes fadeIn {
+      from {opacity:0;}
+      to {opacity:1;}
+    }
+
+    @keyframes slideInLeft {
+      from {opacity:0; transform: translateX(-50px);}
+      to {opacity:1; transform: translateX(0);}
+    }
+
+    @keyframes slideInRight {
+      from {opacity:0; transform: translateX(50px);}
+      to {opacity:1; transform: translateX(0);}
+    }
+
+    /* Footer animation */
+    footer {
+      position: fixed;
+      bottom: 10px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 30px;
+      font-weight: bold;
+      color: #1a1f36;
+      animation: slideText 5s linear infinite;
+    }
+
+    @keyframes slideText {
+      0% { transform: translateX(-50%) translateX(0%); }
+      33% { transform: translateX(-50%) translateX(100px); }
+      66% { transform: translateX(-50%) translateX(-100px); }
+      100% { transform: translateX(-50%) translateX(0%); }
+    }
+
+    @media(max-width: 700px) {
+      .login-container {
+        flex-direction: column;
+      }
+      .login-photo {
+        height: 200px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-photo"></div>
+    <div class="login-box">
+      <h2>🔐 LOGIN</h2>
+      <input type="text" id="username" placeholder="Username">
+      <input type="password" id="password" placeholder="Password">
+      <button onclick="login()">Submit</button>
+    </div>
+  </div>
+
+  <footer>JEEVANKISHORE FINCO</footer>
+
+  <script>
+    function login() {
+      const user = document.getElementById('username').value.trim();
+      const pass = document.getElementById('password').value.trim();
+
+      if (!user || !pass) {
+        alert("Please enter both username and password.");
+        return;
+      }
+
+      if (pass === "123456") {
+        window.location.href = "cal.html"; // Redirect to cal.html
+      } else {
+        alert("Incorrect password. Hint: It's 123456");
+      }
+    }
+  </script>
+</body>
+</html>
