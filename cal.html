@@ -1,156 +1,188 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>💼 JEEVANKISHORE FINANCE CO</title>
   <style>
+    /* Your existing dark theme CSS here */
     body {
       font-family: "Segoe UI", Tahoma, sans-serif;
       margin: 0;
       padding: 0;
-      background: #f4f6f8;
-      color: #333;
+      background: linear-gradient(135deg, #232a34, #131722);
+      color: #e1e9f0;
     }
-
     header {
-      background: #1a1f36;
+      background: linear-gradient(90deg, #16181f, #252b46);
       color: #fff;
       padding: 25px 20px;
       text-align: center;
       position: relative;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+      box-shadow: 0 6px 12px rgba(0,0,0,.7);
     }
-
     header h1 {
       margin: 0;
-      font-size: 28px;
-      letter-spacing: 1px;
+      font-size: 30px;
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      animation: fadeInDown 1s ease;
+      color: #fff;
     }
-
+    @keyframes fadeInDown {
+      from { transform: translateY(-20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
     .service-btn {
       position: absolute;
       top: 25px;
       right: 20px;
-      padding: 10px 16px;
-      background: #28a745;
+      padding: 10px 18px;
+      background: linear-gradient(90deg, #28a745 60%, #155e29 100%);
       color: #fff;
       border: none;
-      border-radius: 8px;
+      border-radius: 25px;
       cursor: pointer;
       font-weight: 600;
       transition: 0.3s;
+      box-shadow: 0 4px 8px rgba(40, 167, 69, 0.22);
     }
-
-    .service-btn:hover { background: #218838; }
-
+    .service-btn:hover {
+      background: linear-gradient(90deg, #218838 60%, #14642a 100%);
+      transform: scale(1.05);
+    }
     .grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
       gap: 25px;
-      padding: 30px 20px;
+      padding: 40px 25px;
     }
-
     .card {
-      background: #fff;
-      border-radius: 12px;
+      background: linear-gradient(115deg, #262d3a, #191d25 70%);
+      border-radius: 15px;
       padding: 25px;
-      box-shadow: 0 6px 18px rgba(0,0,0,0.08);
-      transition: 0.3s;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.65);
+      transition: transform 0.3s, box-shadow 0.3s;
+      animation: fadeInUp 0.85s;
+      border: 1px solid #232a34;
+      color: #e1e9f0;
     }
-
+    .card:hover {
+      transform: translateY(-5px) scale(1.01);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.85);
+    }
+    @keyframes fadeInUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
     h2 {
-      color: #1a1f36;
+      color: #91abd9;
       margin-bottom: 20px;
-      font-size: 22px;
-      border-bottom: 2px solid #eee;
+      font-size: 23px;
+      border-bottom: 2px solid #222a34;
       padding-bottom: 10px;
+      text-shadow: 0 2px 3px rgba(40,40,60,0.1);
     }
-
     label {
       display: block;
       margin-top: 15px;
       font-weight: 600;
-      color: #555;
+      color: #b8c7ec;
     }
-
-    input {
+    input, input[type="email"] {
+      background: #151a23;
+      color: #e1e9f0;
       padding: 10px 12px;
       width: 100%;
       margin-top: 5px;
-      border: 1px solid #ccc;
-      border-radius: 8px;
-      font-size: 14px;
+      border: 1px solid #374156;
+      border-radius: 10px;
+      font-size: 15px;
       outline: none;
-      transition: 0.3s;
+      transition: border 0.3s, box-shadow 0.3s;
+      box-shadow: none;
     }
-
-    input:focus {
-      border-color: #007bff;
-      box-shadow: 0 0 5px rgba(0,123,255,0.3);
+    input:focus, input[type="email"]:focus {
+      border-color: #4e9cff;
+      box-shadow: 0 0 6px #4e9cff44;
     }
-
     button {
       margin-top: 12px;
-      padding: 10px 18px;
+      padding: 10px 20px;
       border: none;
-      background: #007bff;
+      background: linear-gradient(45deg, #2388ff 60%, #002672 100%);
       color: white;
-      border-radius: 8px;
+      border-radius: 25px;
       cursor: pointer;
       font-weight: 600;
       font-size: 14px;
       transition: 0.3s;
+      box-shadow: 0 4px 10px rgba(36,152,255,0.12);
     }
-
-    button:hover { background: #0056b3; }
-
-    #result {
+    button:hover {
+      background: linear-gradient(45deg, #195a90 60%, #002672 100%);
+      transform: scale(1.05);
+    }
+    #result, #emiResult, #mileageResult, #taxResult {
       margin-top: 15px;
       padding: 15px;
-      border-radius: 10px;
-      background: #f1f3f6;
+      border-radius: 12px;
+      background: #1b2231;
       font-size: 15px;
-      line-height: 1.5;
-      color: #333;
+      line-height: 1.6;
+      color: #f1feff;
+      box-shadow: inset 0 2px 5px #181d22b0;
+      border: 1px solid #232a34;
     }
-
     .expense-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      gap: 15px;
+      gap: 12px;
       margin-top: 12px;
+      animation: slideIn 0.4s;
     }
-
-    .expense-row input[type="number"] {
-      flex: 0.5;
-      font-weight: bold;
-      font-size: 16px;
-      padding: 10px 12px;
+    @keyframes slideIn {
+      from { transform: translateX(-20px); opacity: 0; }
+      to { transform: translateX(0); opacity: 1; }
+    }
+    .expense-row input[type="number"], .expense-row input[type="text"] {
+      background: #151a23;
+      border: 1px solid #374156;
+      color: #e1e9f0;
+      flex: 0.6;
+      font-weight: 500;
+      font-size: 15px;
+      padding: 10px;
       border-radius: 8px;
-      border: 1px solid #ccc;
-      text-align: left;
+      transition: border 0.3s, box-shadow 0.3s;
     }
-
     .expense-row label {
       flex: 1;
       font-weight: 600;
-      font-size: 16px;
-      color: #555;
-      text-align: left;
+      font-size: 15px;
+      color: #9faec9;
     }
-
     .expense-row button {
-      flex: 0.2;
-      background: #28a745;
-      color: white;
-      font-weight: 600;
+      flex: 0.25;
+      background: linear-gradient(120deg, #bf2a3a 60%, #ac1729 100%);
       border-radius: 8px;
-      cursor: pointer;
-      transition: 0.3s;
+      color: #fff;
+      box-shadow: 0 3px 8px #bf2a3a22;
     }
-
-    .expense-row button:hover { background: #218838; }
+    .expense-row button:hover {
+      background: linear-gradient(120deg, #d04a5e 60%, #8e1625 100%);
+    }
+    ::-webkit-scrollbar { width: 10px; }
+    ::-webkit-scrollbar-thumb { background: #191d25; border-radius: 8px; }
+    input[type=number]::-webkit-inner-spin-button, 
+    input[type=number]::-webkit-outer-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+      background: none;
+    }
+    input[type=number] {
+      -moz-appearance: textfield;
+    }
   </style>
 </head>
 <body>
@@ -158,186 +190,249 @@
     <h1>💼 JEEVANKISHORE FINANCE CO</h1>
     <button class="service-btn" onclick="location.href='service.html'">🔗 Services</button>
   </header>
-
   <div class="grid">
-    <!-- Expense Tracker -->
     <div class="card">
       <h2>💰 Monthly Expense Tracker</h2>
       <label>Monthly Salary:</label>
-      <input type="number" id="salary" placeholder="₹ Enter your salary">
-      <h3>Expenses</h3>
+      <input type="number" id="salary" placeholder="₹ Enter your salary" />
+      <h3 style="color:#6ea1e6;">Expenses</h3>
       <div id="expenseList"></div>
       <div class="expense-row">
-        <input type="text" id="newCategory" placeholder="Add new category e.g., Fuel">
+        <input type="text" id="newCategory" placeholder="Add new category e.g., Fuel" />
         <button onclick="addCategory()">➕ Add</button>
       </div>
       <button onclick="calculate()">Calculate Balance</button>
       <button onclick="exportExcel('expense')">📤 Export</button>
-      <input type="email" id="expenseEmail" placeholder="Recipient Email">
+      <input type="email" id="expenseEmail" placeholder="Recipient Email" />
       <button onclick="sendExcel('expense')">📧 Send</button>
       <div id="result"></div>
     </div>
-
-    <!-- EMI Calculator -->
     <div class="card">
       <h2>🏦 EMI Calculator</h2>
       <label>Loan Amount:</label>
-      <input type="number" id="loanAmount" placeholder="₹ Loan amount">
+      <input type="number" id="loanAmount" placeholder="₹ Loan amount" />
       <label>Interest Rate (% per annum):</label>
-      <input type="number" id="interestRate" placeholder="e.g., 8.5">
+      <input type="number" id="interestRate" placeholder="e.g., 8.5" />
       <label>Tenure (in months):</label>
-      <input type="number" id="tenure" placeholder="Months">
+      <input type="number" id="tenure" placeholder="Months" />
       <button onclick="calculateEMI()">Calculate EMI</button>
       <button onclick="exportExcel('emi')">📤 Export</button>
-      <input type="email" id="emiEmail" placeholder="Recipient Email">
+      <input type="email" id="emiEmail" placeholder="Recipient Email" />
       <button onclick="sendExcel('emi')">📧 Send</button>
       <div id="emiResult"></div>
     </div>
-
-    <!-- Mileage Calculator -->
     <div class="card">
       <h2>⛽ Mileage Calculator</h2>
       <label>Distance Travelled (km):</label>
-      <input type="number" id="distance" placeholder="km">
+      <input type="number" id="distance" placeholder="km" />
       <label>Fuel Consumed (litres):</label>
-      <input type="number" id="fuel" placeholder="litres">
+      <input type="number" id="fuel" placeholder="litres" />
       <button onclick="calculateMileage()">Calculate Mileage</button>
       <button onclick="exportExcel('mileage')">📤 Export</button>
-      <input type="email" id="mileageEmail" placeholder="Recipient Email">
+      <input type="email" id="mileageEmail" placeholder="Recipient Email" />
       <button onclick="sendExcel('mileage')">📧 Send</button>
       <div id="mileageResult"></div>
     </div>
-
-    <!-- Income Tax Calculator -->
     <div class="card">
       <h2>💸 Income Tax Calculator</h2>
       <label>Annual Income:</label>
-      <input type="number" id="income" placeholder="₹ Annual income">
+      <input type="number" id="income" placeholder="₹ Annual income" />
       <label>Deductions (₹):</label>
-      <input type="number" id="deductions" placeholder="₹ Deductions">
+      <input type="number" id="deductions" placeholder="₹ Deductions" />
       <button onclick="calculateTax()">Calculate Tax</button>
       <button onclick="exportExcel('tax')">📤 Export</button>
-      <input type="email" id="taxEmail" placeholder="Recipient Email">
+      <input type="email" id="taxEmail" placeholder="Recipient Email" />
       <button onclick="sendExcel('tax')">📧 Send</button>
       <div id="taxResult"></div>
     </div>
   </div>
 
-  <!-- Excel + EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@2/dist/email.min.js"></script>
   <script>
-    // Initialize EmailJS
-    (function(){ emailjs.init("YOUR_USER_ID"); })();
+    (function () {
+      emailjs.init({ publicKey: "a5wT8LmFWcwgsHzMj" });
+    })();
 
-    // Expense Tracker
-    let categories = JSON.parse(localStorage.getItem("categories")) || [
-      { name: "Groceries", value: 0 },
-      { name: "Medical", value: 0 },
-      { name: "Shopping", value: 0 }
-    ];
-    window.onload = () => { 
-      document.getElementById("salary").value = localStorage.getItem("salary") || ""; 
-      renderCategories(); 
+    let categories =
+      JSON.parse(localStorage.getItem("categories")) || [
+        { name: "Groceries", value: 0 },
+        { name: "Medical", value: 0 },
+        { name: "Shopping", value: 0 },
+      ];
+
+    window.onload = () => {
+      document.getElementById("salary").value = localStorage.getItem("salary") || "";
+      renderCategories();
     };
+
     function renderCategories() {
       const container = document.getElementById("expenseList");
       container.innerHTML = "";
       categories.forEach((cat, index) => {
         container.innerHTML += `
           <div class="expense-row">
-            <input type="number" value="${cat.value}" onchange="updateCategory(${index}, this.value)">
+            <input type="number" value="${cat.value}" onchange="updateCategory(${index}, this.value)" />
             <label>${cat.name}</label>
             <button onclick="removeCategory(${index})">🗑️</button>
           </div>`;
       });
     }
-    function updateCategory(i,v){categories[i].value=parseFloat(v)||0;localStorage.setItem("categories",JSON.stringify(categories));}
-    function addCategory(){const n=document.getElementById("newCategory").value.trim();if(!n)return;categories.push({name:n,value:0});localStorage.setItem("categories",JSON.stringify(categories));renderCategories();}
-
+    function updateCategory(i, v) {
+      categories[i].value = parseFloat(v) || 0;
+      localStorage.setItem("categories", JSON.stringify(categories));
+    }
+    function addCategory() {
+      const n = document.getElementById("newCategory").value.trim();
+      if (!n) return;
+      categories.push({ name: n, value: 0 });
+      localStorage.setItem("categories", JSON.stringify(categories));
+      document.getElementById("newCategory").value = "";
+      renderCategories();
+    }
+    function removeCategory(i) {
+      categories.splice(i, 1);
+      localStorage.setItem("categories", JSON.stringify(categories));
+      renderCategories();
+    }
     function calculate() {
-      const salary = parseFloat(document.getElementById("salary").value)||0;
-      localStorage.setItem("salary",salary);
-      let totalExpenses=categories.reduce((s,c)=>s+(c.value||0),0);
-      const balance=salary-totalExpenses;
-      document.getElementById("result").innerHTML=`<p><b>Total Expenses:</b> ₹${totalExpenses}</p><p><b>Remaining Balance:</b> ₹${balance}</p>`;
+      const salary = parseFloat(document.getElementById("salary").value) || 0;
+      localStorage.setItem("salary", salary);
+      let totalExpenses = categories.reduce((s, c) => s + (c.value || 0), 0);
+      const balance = salary - totalExpenses;
+      document.getElementById("result").innerHTML = `<p><b>Total Expenses:</b> ₹${totalExpenses}</p><p><b>Remaining Balance:</b> ₹${balance}</p>`;
     }
-
-    // EMI
-    function calculateEMI(){
-      const P=parseFloat(document.getElementById("loanAmount").value)||0;
-      const R=(parseFloat(document.getElementById("interestRate").value)||0)/12/100;
-      const N=parseFloat(document.getElementById("tenure").value)||0;
-      if(P<=0||R<=0||N<=0){document.getElementById("emiResult").innerText="Enter valid values";return;}
-      const emi=P*R*Math.pow(1+R,N)/(Math.pow(1+R,N)-1);
-      document.getElementById("emiResult").innerHTML=`<p><b>Monthly EMI:</b> ₹${emi.toFixed(2)}</p>`;
-    }
-
-    // Mileage
-    function calculateMileage(){
-      const d=parseFloat(document.getElementById("distance").value)||0;
-      const f=parseFloat(document.getElementById("fuel").value)||0;
-      if(d<=0||f<=0){document.getElementById("mileageResult").innerText="Enter valid values";return;}
-      const m=d/f;
-      document.getElementById("mileageResult").innerHTML=`<p><b>Mileage:</b> ${m.toFixed(2)} km/l</p>`;
-    }
-
-    // Tax
-    function calculateTax(){
-      const income=parseFloat(document.getElementById("income").value)||0;
-      const deductions=parseFloat(document.getElementById("deductions").value)||0;
-      const taxable=income-deductions;
-      let tax=0;
-      if(taxable<=250000)tax=0;
-      else if(taxable<=500000)tax=0.05*(taxable-250000);
-      else if(taxable<=1000000)tax=12500+0.2*(taxable-500000);
-      else tax=112500+0.3*(taxable-1000000);
-      document.getElementById("taxResult").innerHTML=`<p><b>Taxable Income:</b> ₹${taxable}</p><p><b>Tax Payable:</b> ₹${tax.toFixed(2)}</p>`;
-    }
-
-    // Export & Send
-    function exportExcel(type){
-      let data=[["Field","Value"]];
-      if(type==="expense"){
-        const salary=parseFloat(document.getElementById("salary").value)||0;
-        let total=categories.reduce((s,c)=>s+(c.value||0),0);
-        let balance=salary-total;
-        categories.forEach(c=>data.push([c.name,c.value]));
-        data.push(["Total Expenses",total],["Salary",salary],["Remaining Balance",balance]);
+    function calculateEMI() {
+      const P = parseFloat(document.getElementById("loanAmount").value) || 0;
+      const R = (parseFloat(document.getElementById("interestRate").value) || 0) / 12 / 100;
+      const N = parseFloat(document.getElementById("tenure").value) || 0;
+      if (P <= 0 || R <= 0 || N <= 0) {
+        document.getElementById("emiResult").innerText = "Enter valid values";
+        return;
       }
-      if(type==="emi"){
-        data.push(["Loan Amount",document.getElementById("loanAmount").value]);
-        data.push(["Interest Rate",document.getElementById("interestRate").value]);
-        data.push(["Tenure",document.getElementById("tenure").value]);
-        data.push(["EMI",document.getElementById("emiResult").innerText]);
-      }
-      if(type==="mileage"){
-        data.push(["Distance",document.getElementById("distance").value]);
-        data.push(["Fuel",document.getElementById("fuel").value]);
-        data.push(["Mileage",document.getElementById("mileageResult").innerText]);
-      }
-      if(type==="tax"){
-        data.push(["Income",document.getElementById("income").value]);
-        data.push(["Deductions",document.getElementById("deductions").value]);
-        data.push(["Tax Result",document.getElementById("taxResult").innerText]);
-      }
-      const ws=XLSX.utils.aoa_to_sheet(data);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Report");
-      XLSX.writeFile(wb,`${type}_report.xlsx`);
+      const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
+      document.getElementById("emiResult").innerHTML = `<p><b>Monthly EMI:</b> ₹${emi.toFixed(2)}</p>`;
     }
-
-    function sendExcel(type){
-      const email=document.getElementById(type+"Email").value.trim();
-      if(!email)return alert("Enter recipient email!");
-      let data=[["Field","Value"]];
-      if(type==="expense"){const s=parseFloat(document.getElementById("salary").value)||0;let t=categories.reduce((a,c)=>a+(c.value||0),0);let b=s-t;categories.forEach(c=>data.push([c.name,c.value]));data.push(["Total",t],["Salary",s],["Balance",b]);}
-      if(type==="emi"){data.push(["Loan",document.getElementById("loanAmount").value],["Rate",document.getElementById("interestRate").value],["Tenure",document.getElementById("tenure").value],["EMI",document.getElementById("emiResult").innerText]);}
-      if(type==="mileage"){data.push(["Distance",document.getElementById("distance").value],["Fuel",document.getElementById("fuel").value],["Mileage",document.getElementById("mileageResult").innerText]);}
-      if(type==="tax"){data.push(["Income",document.getElementById("income").value],["Deductions",document.getElementById("deductions").value],["Result",document.getElementById("taxResult").innerText]);}
-      const ws=XLSX.utils.aoa_to_sheet(data);const wb=XLSX.utils.book_new();XLSX.utils.book_append_sheet(wb,ws,"Report");
-      const excelBinary=XLSX.write(wb,{bookType:"xlsx",type:"base64"});
-      emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{to_email:email,message:"Report attached",attachment:excelBinary})
-      .then(()=>alert("✅ Email sent!"))
-      .catch(e=>alert("❌ Failed: "+JSON.stringify(e)));
+    function calculateMileage() {
+      const d = parseFloat(document.getElementById("distance").value) || 0;
+      const f = parseFloat(document.getElementById("fuel").value) || 0;
+      if (d <= 0 || f <= 0) {
+        document.getElementById("mileageResult").innerText = "Enter valid values";
+        return;
+      }
+      const m = d / f;
+      document.getElementById("mileageResult").innerHTML = `<p><b>Mileage:</b> ${m.toFixed(2)} km/l</p>`;
+    }
+    function calculateTax() {
+      const income = parseFloat(document.getElementById("income").value) || 0;
+      const deductions = parseFloat(document.getElementById("deductions").value) || 0;
+      const taxable = income - deductions;
+      let tax = 0;
+      if (taxable <= 250000) tax = 0;
+      else if (taxable <= 500000) tax = 0.05 * (taxable - 250000);
+      else if (taxable <= 1000000) tax = 12500 + 0.2 * (taxable - 500000);
+      else tax = 112500 + 0.3 * (taxable - 1000000);
+      document.getElementById("taxResult").innerHTML = `<p><b>Taxable Income:</b> ₹${taxable}</p><p><b>Tax Payable:</b> ₹${tax.toFixed(2)}</p>`;
+    }
+    function exportExcel(type) {
+      let now = new Date();
+      let dateStr = now.toLocaleDateString();
+      let data = [
+        ["💼 JEEVANKISHORE FINANCE CO"],
+        ["Report generated on:", dateStr],
+        [""],
+        ["Field", "Value"],
+      ];
+      if (type === "expense") {
+        const salary = parseFloat(document.getElementById("salary").value) || 0;
+        let total = categories.reduce((s, c) => s + (c.value || 0), 0);
+        let balance = salary - total;
+        categories.forEach((c) => data.push([c.name, c.value]));
+        data.push(["Total Expenses", total], ["Salary", salary], ["Remaining Balance", balance]);
+      } else if (type === "emi") {
+        data.push(["Loan Amount", document.getElementById("loanAmount").value]);
+        data.push(["Interest Rate", document.getElementById("interestRate").value]);
+        data.push(["Tenure", document.getElementById("tenure").value]);
+        data.push(["EMI", document.getElementById("emiResult").innerText]);
+      } else if (type === "mileage") {
+        data.push(["Distance", document.getElementById("distance").value]);
+        data.push(["Fuel", document.getElementById("fuel").value]);
+        data.push(["Mileage", document.getElementById("mileageResult").innerText]);
+      } else if (type === "tax") {
+        data.push(["Income", document.getElementById("income").value]);
+        data.push(["Deductions", document.getElementById("deductions").value]);
+        data.push(["Tax Result", document.getElementById("taxResult").innerText]);
+      }
+      const ws = XLSX.utils.aoa_to_sheet(data);
+      const headerRow = 3;
+      ws["A" + (headerRow + 1)].s = {
+        font: { bold: true, color: { rgb: "FFFFFF" } },
+        fill: { fgColor: { rgb: "4472C4" } },
+        alignment: { horizontal: "center" },
+      };
+      ws["B" + (headerRow + 1)].s = {
+        font: { bold: true, color: { rgb: "FFFFFF" } },
+        fill: { fgColor: { rgb: "4472C4" } },
+        alignment: { horizontal: "center" },
+      };
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Report");
+      XLSX.writeFile(wb, `${type}_report.xlsx`);
+    }
+    function sendExcel(type) {
+      const email = document.getElementById(type + "Email").value.trim();
+      if (!email) return alert("Enter recipient email!");
+      let now = new Date();
+      let dateStr = now.toLocaleDateString();
+      let data = [
+        ["💼 JEEVANKISHORE FINANCE CO"],
+        ["Report generated on:", dateStr],
+        [""],
+        ["Field", "Value"],
+      ];
+      if (type === "expense") {
+        const s = parseFloat(document.getElementById("salary").value) || 0;
+        let t = categories.reduce((a, c) => a + (c.value || 0), 0);
+        let b = s - t;
+        categories.forEach((c) => data.push([c.name, c.value]));
+        data.push(["Total", t], ["Salary", s], ["Balance", b]);
+      } else if (type === "emi") {
+        data.push(["Loan Amount", document.getElementById("loanAmount").value]);
+        data.push(["Interest Rate", document.getElementById("interestRate").value]);
+        data.push(["Tenure", document.getElementById("tenure").value]);
+        data.push(["EMI", document.getElementById("emiResult").innerText]);
+      } else if (type === "mileage") {
+        data.push(["Distance", document.getElementById("distance").value]);
+        data.push(["Fuel", document.getElementById("fuel").value]);
+        data.push(["Mileage", document.getElementById("mileageResult").innerText]);
+      } else if (type === "tax") {
+        data.push(["Income", document.getElementById("income").value]);
+        data.push(["Deductions", document.getElementById("deductions").value]);
+        data.push(["Tax Result", document.getElementById("taxResult").innerText]);
+      }
+      const ws = XLSX.utils.aoa_to_sheet(data);
+      const headerRow = 3;
+      ws["A" + (headerRow + 1)].s = {
+        font: { bold: true, color: { rgb: "FFFFFF" } },
+        fill: { fgColor: { rgb: "4472C4" } },
+        alignment: { horizontal: "center" },
+      };
+      ws["B" + (headerRow + 1)].s = {
+        font: { bold: true, color: { rgb: "FFFFFF" } },
+        fill: { fgColor: { rgb: "4472C4" } },
+        alignment: { horizontal: "center" },
+      };
+      const wb = XLSX.utils.book_new();
+      XLSX.utils.book_append_sheet(wb, ws, "Report");
+      const excelBinary = XLSX.write(wb, { bookType: "xlsx", type: "base64" });
+      emailjs
+        .send("service_1jyd916", "template_bg5bbhq", {
+          to_email: email,
+          message: "Here is your requested financial report.",
+          attachment: excelBinary,
+        })
+        .then(() => alert("✅ Styled Excel report sent!"))
+        .catch((e) => alert("❌ Failed: " + JSON.stringify(e)));
     }
   </script>
 </body>
