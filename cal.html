@@ -2,437 +2,207 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>💼 JEEVANKISHORE FINANCE CO</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>🚨 SOS, Medicine & Meal Tracker</title>
+
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
   <style>
-    /* Your existing dark theme CSS here */
+    :root {
+      --primary: #1976D2;
+      --danger: #D32F2F;
+      --success: #388E3C;
+      --bg: #f9f9f9;
+      --card: #fff;
+      --text: #333;
+    }
+    body.dark { --bg: #121212; --card: #1e1e1e; --text: #eee; }
     body {
-      font-family: "Segoe UI", Tahoma, sans-serif;
+      font-family: "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      padding: 20px;
       margin: 0;
-      padding: 0;
-      background: linear-gradient(135deg, #232a34, #131722);
-      color: #e1e9f0;
+      transition: 0.4s;
     }
-    header {
-      background: linear-gradient(90deg, #16181f, #252b46);
-      color: #fff;
-      padding: 25px 20px;
-      text-align: center;
-      position: relative;
-      box-shadow: 0 6px 12px rgba(0,0,0,.7);
-    }
-    header h1 {
-      margin: 0;
-      font-size: 30px;
-      letter-spacing: 1.5px;
-      font-weight: 700;
-      animation: fadeInDown 1s ease;
-      color: #fff;
-    }
-    @keyframes fadeInDown {
-      from { transform: translateY(-20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    .service-btn {
-      position: absolute;
-      top: 25px;
-      right: 20px;
-      padding: 10px 18px;
-      background: linear-gradient(90deg, #28a745 60%, #155e29 100%);
-      color: #fff;
-      border: none;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 600;
-      transition: 0.3s;
-      box-shadow: 0 4px 8px rgba(40, 167, 69, 0.22);
-    }
-    .service-btn:hover {
-      background: linear-gradient(90deg, #218838 60%, #14642a 100%);
-      transform: scale(1.05);
-    }
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-      gap: 25px;
-      padding: 40px 25px;
-    }
+    .container { max-width: 700px; margin: auto; }
+    h2 { border-bottom: 2px solid var(--primary); padding-bottom: 5px; }
     .card {
-      background: linear-gradient(115deg, #262d3a, #191d25 70%);
-      border-radius: 15px;
-      padding: 25px;
-      box-shadow: 0 8px 28px rgba(0,0,0,0.65);
-      transition: transform 0.3s, box-shadow 0.3s;
-      animation: fadeInUp 0.85s;
-      border: 1px solid #232a34;
-      color: #e1e9f0;
-    }
-    .card:hover {
-      transform: translateY(-5px) scale(1.01);
-      box-shadow: 0 12px 32px rgba(0,0,0,0.85);
-    }
-    @keyframes fadeInUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-    h2 {
-      color: #91abd9;
+      background: var(--card);
+      padding: 20px;
+      border-radius: 16px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
       margin-bottom: 20px;
-      font-size: 23px;
-      border-bottom: 2px solid #222a34;
-      padding-bottom: 10px;
-      text-shadow: 0 2px 3px rgba(40,40,60,0.1);
     }
-    label {
-      display: block;
-      margin-top: 15px;
-      font-weight: 600;
-      color: #b8c7ec;
-    }
-    input, input[type="email"] {
-      background: #151a23;
-      color: #e1e9f0;
-      padding: 10px 12px;
-      width: 100%;
-      margin-top: 5px;
-      border: 1px solid #374156;
-      border-radius: 10px;
-      font-size: 15px;
-      outline: none;
-      transition: border 0.3s, box-shadow 0.3s;
-      box-shadow: none;
-    }
-    input:focus, input[type="email"]:focus {
-      border-color: #4e9cff;
-      box-shadow: 0 0 6px #4e9cff44;
-    }
-    button {
-      margin-top: 12px;
-      padding: 10px 20px;
-      border: none;
-      background: linear-gradient(45deg, #2388ff 60%, #002672 100%);
-      color: white;
-      border-radius: 25px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 14px;
-      transition: 0.3s;
-      box-shadow: 0 4px 10px rgba(36,152,255,0.12);
-    }
-    button:hover {
-      background: linear-gradient(45deg, #195a90 60%, #002672 100%);
-      transform: scale(1.05);
-    }
-    #result, #emiResult, #mileageResult, #taxResult {
-      margin-top: 15px;
-      padding: 15px;
-      border-radius: 12px;
-      background: #1b2231;
-      font-size: 15px;
-      line-height: 1.6;
-      color: #f1feff;
-      box-shadow: inset 0 2px 5px #181d22b0;
-      border: 1px solid #232a34;
-    }
-    .expense-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 12px;
-      margin-top: 12px;
-      animation: slideIn 0.4s;
-    }
-    @keyframes slideIn {
-      from { transform: translateX(-20px); opacity: 0; }
-      to { transform: translateX(0); opacity: 1; }
-    }
-    .expense-row input[type="number"], .expense-row input[type="text"] {
-      background: #151a23;
-      border: 1px solid #374156;
-      color: #e1e9f0;
-      flex: 0.6;
-      font-weight: 500;
-      font-size: 15px;
-      padding: 10px;
-      border-radius: 8px;
-      transition: border 0.3s, box-shadow 0.3s;
-    }
-    .expense-row label {
-      flex: 1;
-      font-weight: 600;
-      font-size: 15px;
-      color: #9faec9;
-    }
-    .expense-row button {
-      flex: 0.25;
-      background: linear-gradient(120deg, #bf2a3a 60%, #ac1729 100%);
-      border-radius: 8px;
-      color: #fff;
-      box-shadow: 0 3px 8px #bf2a3a22;
-    }
-    .expense-row button:hover {
-      background: linear-gradient(120deg, #d04a5e 60%, #8e1625 100%);
-    }
-    ::-webkit-scrollbar { width: 10px; }
-    ::-webkit-scrollbar-thumb { background: #191d25; border-radius: 8px; }
-    input[type=number]::-webkit-inner-spin-button, 
-    input[type=number]::-webkit-outer-spin-button {
-      -webkit-appearance: none;
-      margin: 0;
-      background: none;
-    }
-    input[type=number] {
-      -moz-appearance: textfield;
-    }
+    .sos-btn { display: block; width: 100%; background-color: var(--danger); color: #fff; font-size: 32px; padding: 20px 0; border: none; border-radius: 40px; cursor: pointer; transition: 0.3s; }
+    .sos-btn:hover { opacity: 0.85; }
+    input, button, select { font-size: 16px; padding: 10px; margin-top: 8px; width: 100%; border-radius: 8px; border: 1px solid #ccc; box-sizing: border-box; }
+    button { background-color: var(--primary); color: white; border: none; cursor: pointer; }
+    button:hover { opacity: 0.9; }
+    .med-item, .meal-item { display: flex; justify-content: space-between; background: rgba(0,0,0,0.05); padding: 10px; border-radius: 8px; margin: 5px 0; align-items: center; }
+    #clock { text-align: center; font-size: 18px; margin-bottom: 20px; }
+    .toggle { background: var(--success); }
+    .toggle.off { background: #fbc02d; color: #000; }
+    .top-bar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+    .done { text-decoration: line-through; color: gray; }
+    #gcalStatus { font-size: 14px; text-align: center; color: var(--success); }
+    .fab { position: fixed; bottom: 25px; right: 25px; width: 60px; height: 60px; border-radius: 50%; background: var(--primary); color: white; font-size: 30px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3); cursor: pointer; }
+    .toast { position: fixed; bottom: 20px; right: 20px; background: #333; color: #fff; padding: 10px 16px; border-radius: 8px; opacity: 0.9; z-index: 1000; animation: fadeInOut 3s forwards; }
+    .toast.success { background: #388E3C; }
+    .toast.error { background: #D32F2F; }
+    @keyframes fadeInOut { 0% { opacity: 0; transform: translateY(20px); } 10%,90% { opacity: 0.9; transform: translateY(0); } 100% { opacity: 0; transform: translateY(20px); }
   </style>
 </head>
+
 <body>
-  <header>
-    <h1>💼 JEEVANKISHORE FINANCE CO</h1>
-    <button class="service-btn" onclick="location.href='service.html'">🔗 Services</button>
-  </header>
-  <div class="grid">
-    <div class="card">
-      <h2>💰 Monthly Expense Tracker</h2>
-      <label>Monthly Salary:</label>
-      <input type="number" id="salary" placeholder="₹ Enter your salary" />
-      <h3 style="color:#6ea1e6;">Expenses</h3>
-      <div id="expenseList"></div>
-      <div class="expense-row">
-        <input type="text" id="newCategory" placeholder="Add new category e.g., Fuel" />
-        <button onclick="addCategory()">➕ Add</button>
-      </div>
-      <button onclick="calculate()">Calculate Balance</button>
-      <button onclick="exportExcel('expense')">📤 Export</button>
-      <input type="email" id="expenseEmail" placeholder="Recipient Email" />
-      <button onclick="sendExcel('expense')">📧 Send</button>
-      <div id="result"></div>
+  <div class="container">
+    <div class="top-bar">
+      <h1>🩺 Health & Safety Hub</h1>
+      <button onclick="toggleDarkMode()">🌗</button>
     </div>
-    <div class="card">
-      <h2>🏦 EMI Calculator</h2>
-      <label>Loan Amount:</label>
-      <input type="number" id="loanAmount" placeholder="₹ Loan amount" />
-      <label>Interest Rate (% per annum):</label>
-      <input type="number" id="interestRate" placeholder="e.g., 8.5" />
-      <label>Tenure (in months):</label>
-      <input type="number" id="tenure" placeholder="Months" />
-      <button onclick="calculateEMI()">Calculate EMI</button>
-      <button onclick="exportExcel('emi')">📤 Export</button>
-      <input type="email" id="emiEmail" placeholder="Recipient Email" />
-      <button onclick="sendExcel('emi')">📧 Send</button>
-      <div id="emiResult"></div>
+    <p id="clock"></p>
+
+    <!-- Google Calendar Connect -->
+    <button id="googleConnectBtn" onclick="handleGoogleLogin()">🔑 Connect Google Calendar</button>
+    <p id="gcalStatus"></p>
+
+    <!-- SOS Button -->
+    <button class="sos-btn" onclick="sendSOS()">🚨 SEND SOS</button>
+
+    <!-- Call Button -->
+    <div class="card" style="text-align:center;">
+      <h2>📞 Emergency Call</h2>
+      <p>Tap below to instantly call your emergency number.</p>
+      <a href="tel:9442983888">
+        <button style="background:#D32F2F; font-size:20px;">📞 Call 9442983888</button>
+      </a>
     </div>
+
+    <!-- Medicine Section -->
     <div class="card">
-      <h2>⛽ Mileage Calculator</h2>
-      <label>Distance Travelled (km):</label>
-      <input type="number" id="distance" placeholder="km" />
-      <label>Fuel Consumed (litres):</label>
-      <input type="number" id="fuel" placeholder="litres" />
-      <button onclick="calculateMileage()">Calculate Mileage</button>
-      <button onclick="exportExcel('mileage')">📤 Export</button>
-      <input type="email" id="mileageEmail" placeholder="Recipient Email" />
-      <button onclick="sendExcel('mileage')">📧 Send</button>
-      <div id="mileageResult"></div>
+      <h2>💊 Medicine Tracker</h2>
+      <form id="medForm" onsubmit="event.preventDefault(); addMedicine();">
+        <input type="text" id="medName" placeholder="Medicine name" required />
+        <input type="time" id="medTime" required />
+        <button type="submit">Add Medicine (Also adds to Google Calendar)</button>
+      </form>
+      <div id="medList"></div>
+      <button class="toggle" id="alarmToggle" onclick="toggleAlarm()">Alarm ON</button>
+      <button onclick="exportMedicinesToPDF()">📄 Export Medicines</button>
     </div>
+
+    <!-- Meal Section -->
     <div class="card">
-      <h2>💸 Income Tax Calculator</h2>
-      <label>Annual Income:</label>
-      <input type="number" id="income" placeholder="₹ Annual income" />
-      <label>Deductions (₹):</label>
-      <input type="number" id="deductions" placeholder="₹ Deductions" />
-      <button onclick="calculateTax()">Calculate Tax</button>
-      <button onclick="exportExcel('tax')">📤 Export</button>
-      <input type="email" id="taxEmail" placeholder="Recipient Email" />
-      <button onclick="sendExcel('tax')">📧 Send</button>
-      <div id="taxResult"></div>
+      <h2>🍽️ Meal Scheduler</h2>
+      <label>Breakfast: <input type="time" id="breakfastTime" /></label><br />
+      <label>Lunch: <input type="time" id="lunchTime" /></label><br />
+      <label>Dinner: <input type="time" id="dinnerTime" /></label><br />
+      <button onclick="addMealTimesToCalendar()">Add Meals to Google Calendar</button>
+    </div>
+
+    <!-- Weekly Graph -->
+    <div class="card">
+      <h2>📈 Weekly Health Summary</h2>
+      <canvas id="weeklyChart" height="200"></canvas>
+    </div>
+
+    <!-- Health Report -->
+    <div class="card">
+      <h2>📊 Daily Health Report</h2>
+      <div id="reportTableContainer"></div>
+      <button onclick="exportHealthReport()">📄 Export Health Report</button>
     </div>
   </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-  <script>
-    (function () {
-      emailjs.init({ publicKey: "a5wT8LmFWcwgsHzMj" });
-    })();
+  <div class="fab" onclick="scrollToMed()">➕</div>
 
-    let categories =
-      JSON.parse(localStorage.getItem("categories")) || [
-        { name: "Groceries", value: 0 },
-        { name: "Medical", value: 0 },
-        { name: "Shopping", value: 0 },
-      ];
+  <!-- External Libraries -->
+  <script src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://apis.google.com/js/api.js"></script>
+
+  <script>
+    emailjs.init("YOUR_EMAILJS_PUBLIC_KEY");
+    let medicines = [];
+    let meals = [];
+    let healthReport = {};
+    let isGoogleConnected = false;
+
+    // Clock
+    setInterval(() => { document.getElementById("clock").innerText = new Date().toLocaleString(); }, 1000);
 
     window.onload = () => {
-      document.getElementById("salary").value = localStorage.getItem("salary") || "";
-      renderCategories();
+      handleClientLoad();
+      medicines = JSON.parse(localStorage.getItem("medicines") || "[]");
+      healthReport = JSON.parse(localStorage.getItem("healthReport") || "{}");
+      renderMedicines();
+      drawWeeklyChart();
     };
 
-    function renderCategories() {
-      const container = document.getElementById("expenseList");
-      container.innerHTML = "";
-      categories.forEach((cat, index) => {
-        container.innerHTML += `
-          <div class="expense-row">
-            <input type="number" value="${cat.value}" onchange="updateCategory(${index}, this.value)" />
-            <label>${cat.name}</label>
-            <button onclick="removeCategory(${index})">🗑️</button>
-          </div>`;
+    // Toast
+    function showToast(msg, type="success"){ const t=document.createElement("div"); t.className=`toast ${type}`; t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),3000); }
+    function toggleDarkMode(){ document.body.classList.toggle("dark"); showToast("🌗 Theme toggled"); }
+
+    // Medicine
+    function addMedicine(){
+      const name=medName.value.trim(); const time=medTime.value;
+      if(!name||!time) return showToast("Fill all fields","error");
+      medicines.push({name,time}); localStorage.setItem("medicines",JSON.stringify(medicines));
+      renderMedicines();
+      const today=new Date(); const [h,m]=time.split(":");
+      const start=new Date(today.getFullYear(),today.getMonth(),today.getDate(),+h,+m);
+      const end=new Date(start.getTime()+15*60000);
+      createCalendarEvent(start.toISOString(),end.toISOString(),`💊 Take ${name}`);
+      showToast("✅ Medicine added!"); medName.value=medTime.value="";
+    }
+    function deleteMedicine(i){ medicines.splice(i,1); localStorage.setItem("medicines",JSON.stringify(medicines)); renderMedicines(); showToast("🗑️ Medicine deleted"); }
+    function renderMedicines(){ medList.innerHTML = medicines.length ? "" : "<p>No medicines added.</p>";
+      medicines.forEach((m,i)=>{ medList.innerHTML+=`<div class='med-item'><span>💊 <b>${m.name}</b> at ${m.time}</span><button onclick="deleteMedicine(${i})">🗑️</button></div>`; });
+    }
+    function scrollToMed(){ document.getElementById("medForm").scrollIntoView({behavior:"smooth"}); }
+
+    // Google Calendar
+    const CLIENT_ID="749237950089-f7gpgjh22mglc3827s5qa1s433vm6feu.apps.googleusercontent.com";
+    const API_KEY="AIzaSyCYiPB9Er-M0CW4R9ApT3R7Tod3yccKC_A";
+    const DISCOVERY_DOCS=["https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"];
+    const SCOPES="https://www.googleapis.com/auth/calendar.events";
+
+    function handleClientLoad(){ gapi.load("client:auth2", initClient); }
+    function initClient(){
+      gapi.client.init({apiKey:API_KEY, clientId:CLIENT_ID, discoveryDocs:DISCOVERY_DOCS, scope:SCOPES}).then(()=>{
+        const auth=gapi.auth2.getAuthInstance();
+        auth.isSignedIn.listen(updateGCalStatus);
+        updateGCalStatus(auth.isSignedIn.get());
       });
     }
-    function updateCategory(i, v) {
-      categories[i].value = parseFloat(v) || 0;
-      localStorage.setItem("categories", JSON.stringify(categories));
+    function handleGoogleLogin(){ gapi.auth2.getAuthInstance().signIn(); }
+    function updateGCalStatus(signedIn){
+      googleConnectBtn.style.display=signedIn?"none":"block";
+      gcalStatus.textContent=signedIn?"✅ Connected to Google Calendar":"❌ Not connected";
+      isGoogleConnected=signedIn;
     }
-    function addCategory() {
-      const n = document.getElementById("newCategory").value.trim();
-      if (!n) return;
-      categories.push({ name: n, value: 0 });
-      localStorage.setItem("categories", JSON.stringify(categories));
-      document.getElementById("newCategory").value = "";
-      renderCategories();
+    function createCalendarEvent(start,end,title){
+      if(!isGoogleConnected)return;
+      gapi.client.calendar.events.insert({calendarId:"primary",resource:{summary:title,start:{dateTime:start},end:{dateTime:end}}});
     }
-    function removeCategory(i) {
-      categories.splice(i, 1);
-      localStorage.setItem("categories", JSON.stringify(categories));
-      renderCategories();
+
+    // SOS
+    function sendSOS(){
+      navigator.geolocation.getCurrentPosition(pos=>{
+        const loc=`https://maps.google.com/?q=${pos.coords.latitude},${pos.coords.longitude}`;
+        const msg=`🚨 EMERGENCY ALERT!\nLocation: ${loc}`;
+        emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{message:msg});
+        showToast("🚨 SOS sent!");
+      });
     }
-    function calculate() {
-      const salary = parseFloat(document.getElementById("salary").value) || 0;
-      localStorage.setItem("salary", salary);
-      let totalExpenses = categories.reduce((s, c) => s + (c.value || 0), 0);
-      const balance = salary - totalExpenses;
-      document.getElementById("result").innerHTML = `<p><b>Total Expenses:</b> ₹${totalExpenses}</p><p><b>Remaining Balance:</b> ₹${balance}</p>`;
-    }
-    function calculateEMI() {
-      const P = parseFloat(document.getElementById("loanAmount").value) || 0;
-      const R = (parseFloat(document.getElementById("interestRate").value) || 0) / 12 / 100;
-      const N = parseFloat(document.getElementById("tenure").value) || 0;
-      if (P <= 0 || R <= 0 || N <= 0) {
-        document.getElementById("emiResult").innerText = "Enter valid values";
-        return;
-      }
-      const emi = (P * R * Math.pow(1 + R, N)) / (Math.pow(1 + R, N) - 1);
-      document.getElementById("emiResult").innerHTML = `<p><b>Monthly EMI:</b> ₹${emi.toFixed(2)}</p>`;
-    }
-    function calculateMileage() {
-      const d = parseFloat(document.getElementById("distance").value) || 0;
-      const f = parseFloat(document.getElementById("fuel").value) || 0;
-      if (d <= 0 || f <= 0) {
-        document.getElementById("mileageResult").innerText = "Enter valid values";
-        return;
-      }
-      const m = d / f;
-      document.getElementById("mileageResult").innerHTML = `<p><b>Mileage:</b> ${m.toFixed(2)} km/l</p>`;
-    }
-    function calculateTax() {
-      const income = parseFloat(document.getElementById("income").value) || 0;
-      const deductions = parseFloat(document.getElementById("deductions").value) || 0;
-      const taxable = income - deductions;
-      let tax = 0;
-      if (taxable <= 250000) tax = 0;
-      else if (taxable <= 500000) tax = 0.05 * (taxable - 250000);
-      else if (taxable <= 1000000) tax = 12500 + 0.2 * (taxable - 500000);
-      else tax = 112500 + 0.3 * (taxable - 1000000);
-      document.getElementById("taxResult").innerHTML = `<p><b>Taxable Income:</b> ₹${taxable}</p><p><b>Tax Payable:</b> ₹${tax.toFixed(2)}</p>`;
-    }
-    function exportExcel(type) {
-      let now = new Date();
-      let dateStr = now.toLocaleDateString();
-      let data = [
-        ["💼 JEEVANKISHORE FINANCE CO"],
-        ["Report generated on:", dateStr],
-        [""],
-        ["Field", "Value"],
-      ];
-      if (type === "expense") {
-        const salary = parseFloat(document.getElementById("salary").value) || 0;
-        let total = categories.reduce((s, c) => s + (c.value || 0), 0);
-        let balance = salary - total;
-        categories.forEach((c) => data.push([c.name, c.value]));
-        data.push(["Total Expenses", total], ["Salary", salary], ["Remaining Balance", balance]);
-      } else if (type === "emi") {
-        data.push(["Loan Amount", document.getElementById("loanAmount").value]);
-        data.push(["Interest Rate", document.getElementById("interestRate").value]);
-        data.push(["Tenure", document.getElementById("tenure").value]);
-        data.push(["EMI", document.getElementById("emiResult").innerText]);
-      } else if (type === "mileage") {
-        data.push(["Distance", document.getElementById("distance").value]);
-        data.push(["Fuel", document.getElementById("fuel").value]);
-        data.push(["Mileage", document.getElementById("mileageResult").innerText]);
-      } else if (type === "tax") {
-        data.push(["Income", document.getElementById("income").value]);
-        data.push(["Deductions", document.getElementById("deductions").value]);
-        data.push(["Tax Result", document.getElementById("taxResult").innerText]);
-      }
-      const ws = XLSX.utils.aoa_to_sheet(data);
-      const headerRow = 3;
-      ws["A" + (headerRow + 1)].s = {
-        font: { bold: true, color: { rgb: "FFFFFF" } },
-        fill: { fgColor: { rgb: "4472C4" } },
-        alignment: { horizontal: "center" },
-      };
-      ws["B" + (headerRow + 1)].s = {
-        font: { bold: true, color: { rgb: "FFFFFF" } },
-        fill: { fgColor: { rgb: "4472C4" } },
-        alignment: { horizontal: "center" },
-      };
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Report");
-      XLSX.writeFile(wb, `${type}_report.xlsx`);
-    }
-    function sendExcel(type) {
-      const email = document.getElementById(type + "Email").value.trim();
-      if (!email) return alert("Enter recipient email!");
-      let now = new Date();
-      let dateStr = now.toLocaleDateString();
-      let data = [
-        ["💼 JEEVANKISHORE FINANCE CO"],
-        ["Report generated on:", dateStr],
-        [""],
-        ["Field", "Value"],
-      ];
-      if (type === "expense") {
-        const s = parseFloat(document.getElementById("salary").value) || 0;
-        let t = categories.reduce((a, c) => a + (c.value || 0), 0);
-        let b = s - t;
-        categories.forEach((c) => data.push([c.name, c.value]));
-        data.push(["Total", t], ["Salary", s], ["Balance", b]);
-      } else if (type === "emi") {
-        data.push(["Loan Amount", document.getElementById("loanAmount").value]);
-        data.push(["Interest Rate", document.getElementById("interestRate").value]);
-        data.push(["Tenure", document.getElementById("tenure").value]);
-        data.push(["EMI", document.getElementById("emiResult").innerText]);
-      } else if (type === "mileage") {
-        data.push(["Distance", document.getElementById("distance").value]);
-        data.push(["Fuel", document.getElementById("fuel").value]);
-        data.push(["Mileage", document.getElementById("mileageResult").innerText]);
-      } else if (type === "tax") {
-        data.push(["Income", document.getElementById("income").value]);
-        data.push(["Deductions", document.getElementById("deductions").value]);
-        data.push(["Tax Result", document.getElementById("taxResult").innerText]);
-      }
-      const ws = XLSX.utils.aoa_to_sheet(data);
-      const headerRow = 3;
-      ws["A" + (headerRow + 1)].s = {
-        font: { bold: true, color: { rgb: "FFFFFF" } },
-        fill: { fgColor: { rgb: "4472C4" } },
-        alignment: { horizontal: "center" },
-      };
-      ws["B" + (headerRow + 1)].s = {
-        font: { bold: true, color: { rgb: "FFFFFF" } },
-        fill: { fgColor: { rgb: "4472C4" } },
-        alignment: { horizontal: "center" },
-      };
-      const wb = XLSX.utils.book_new();
-      XLSX.utils.book_append_sheet(wb, ws, "Report");
-      const excelBinary = XLSX.write(wb, { bookType: "xlsx", type: "base64" });
-      emailjs
-        .send("service_1jyd916", "template_bg5bbhq", {
-          to_email: email,
-          message: "Here is your requested financial report.",
-          attachment: excelBinary,
-        })
-        .then(() => alert("✅ Styled Excel report sent!"))
-        .catch((e) => alert("❌ Failed: " + JSON.stringify(e)));
+
+    // Weekly Chart
+    function drawWeeklyChart(){
+      const ctx=document.getElementById("weeklyChart").getContext("2d");
+      const week=["Mon","Tue","Wed","Thu","Fri","Sat","Sun"];
+      const data=week.map(()=>Math.floor(Math.random()*5));
+      new Chart(ctx,{type:"bar",data:{labels:week,datasets:[{label:"Medicines Taken",data,backgroundColor:"#1976D2"}]},options:{responsive:true,scales:{y:{beginAtZero:true,ticks:{stepSize:1}}}}});
     }
   </script>
 </body>
